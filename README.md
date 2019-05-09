@@ -16,3 +16,5 @@ z x c v <=> A 0 B F
 
 The roms are currently loaded in a hardcoded fashion so you'll have to edit
 the first few lines to change roms.
+
+![](space_invaders.gif)
