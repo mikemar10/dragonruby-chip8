@@ -1,0 +1,5 @@
+devid=mikemar10
+devtitle=Mike Martin
+gameid=chip8
+gametitle=Dragonruby Chip-8 Interpreter
+version=0.1
