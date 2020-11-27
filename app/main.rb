@@ -1,4 +1,4 @@
-$rom = $dragon.ffi_file.loadfile('roms/space_invaders.ch8').bytes
+$rom = $gtk.read_file('roms/space_invaders.ch8').bytes
 #$rom = $dragon.ffi_file.loadfile('roms/pong.ch8').bytes
 #$rom = $dragon.ffi_file.loadfile('roms/breakout.ch8').bytes
 #$rom = $dragon.ffi_file.loadfile('roms/maze.ch8').bytes
@@ -351,9 +351,16 @@ class Chip8
         fetch_opcode
         parse_opcode
       end
-      game.speed += 1 if inputs.keyboard.key_down.zero
-      game.speed -= 1 if inputs.keyboard.key_down.nine
-      puts "Game speed: #{game.speed}"
+
+      if inputs.keyboard.key_down.zero
+        game.speed += 1
+        puts "Game speed: #{game.speed}"
+      end
+
+      if inputs.keyboard.key_down.nine
+        game.speed -= 1
+        puts "Game speed: #{game.speed}"
+      end
       game.speed = 0 if game.speed < 0
       # puts "#{'%04X' % @opcode} #{@pc} #{@i} #{@registers.join(' ')} STACK: #{@stack.join(' ')}"
     end
@@ -363,7 +370,7 @@ end
 
 $chip8 = Chip8.new
 def tick args
-  game, grid, inputs, outputs = args.game, args.grid, args.inputs, args.outputs
+  game, grid, inputs, outputs = args.state, args.grid, args.inputs, args.outputs
   $chip8.inputs = inputs
   $chip8.outputs = outputs
   $chip8.game = game
